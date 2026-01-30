@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Aprovado - Obrigado!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2942 0%, #0d1b2a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            animation: checkmark 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes checkmark {
+            0% {
+                stroke-dashoffset: 100;
+                stroke-dasharray: 100;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                stroke-dasharray: 100;
+            }
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .status {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .message {
+            color: #4a5568;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .info-box {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #dc2626;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .next-steps {
+            background: #fff5f5;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #f56565;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .next-steps li {
+            color: #4a5568;
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .next-steps li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+        }
+
+        .support {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.95em;
+        }
+
+        .support a {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .support a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">
+            <svg viewBox="0 0 52 52">
+                <polyline points="14 27 22 35 38 19"/>
+            </svg>
+        </div>
+
+        <h1>Pagamento Aprovado! 🎉</h1>
+        
+        <div class="status">
+            ✓ Transação Confirmada
+        </div>
+
+        <p class="message">
+            Sua compra foi processada com sucesso! Estamos muito felizes em tê-lo(a) conosco.
+            Um email de confirmação foi enviado para o seu endereço cadastrado.
+        </p>
+
+        <div class="info-box">
+            <div class="info-item">
+                <span class="info-label">Número do Pedido:</span>
+                <span class="info-value" id="order-number">#123456789</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Data da Compra:</span>
+                <span class="info-value" id="order-date">28/01/2026</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Método de Pagamento:</span>
+                <span class="info-value" id="payment-method">Cartão de Crédito</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Status:</span>
+                <span class="info-value" style="color: #48bb78;">Aprovado</span>
+            </div>
+        </div>
+
+        <div class="next-steps">
+            <h3>📋 Próximos Passos</h3>
+            <ul>
+                <li>Você receberá um email com todos os detalhes da compra</li>
+                <li>Em caso de dúvidas, nossa equipe está disponível</li>
+            </ul>
+        </div>
+
+        <a href="https://dashboard.kiwify.com.br/courses" class="cta-button" target="_blank">Acessar Área de Membros</a>
+
+        <div class="support">
+            Precisa de ajuda? Entre em contato: 
+            <a href="mailto:musicalizarcomsentido@outlook.com">musicalizarcomsentido@outlook.com</a>
+        </div>
+    </div>
+
+    <!-- Meta Pixel Code (Facebook/Instagram) -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // SUBSTITUA 'SEU_ID_DO_PIXEL' pelo número do seu pixel
+        fbq('init', 'SEU_ID_DO_PIXEL');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=SEU_ID_DO_PIXEL&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <script>
+        // Captura parâmetros da URL enviados pela Kiwify
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função para pegar parâmetros da URL
+            function getURLParameter(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Captura dados da Kiwify
+            const orderId = getURLParameter('order_id') || getURLParameter('transaction_id');
+            const orderDate = getURLParameter('order_date');
+            const paymentMethod = getURLParameter('payment_method');
+            const customerName = getURLParameter('customer_name') || getURLParameter('name');
+            const customerEmail = getURLParameter('customer_email') || getURLParameter('email');
+            const orderValue = getURLParameter('order_amount') || getURLParameter('amount');
+
+            // ===== META PIXEL - RASTREAMENTO DE COMPRA =====
+            // Envia evento de compra para o Meta Pixel (Instagram/Facebook)
+            if (typeof fbq !== 'undefined' && orderId) {
+                fbq('track', 'Purchase', {
+                    value: orderValue || 0,
+                    currency: 'BRL',
+                    content_type: 'product',
+                    transaction_id: orderId
+                });
+                console.log('✅ Conversão enviada para o Meta Pixel');
+            }
+
+            // Atualiza número do pedido
+            if (orderId) {
+                document.getElementById('order-number').textContent = '#' + orderId;
+            } else {
+                // Gera número aleatório se não vier da Kiwify
+                document.getElementById('order-number').textContent = '#KW' + Date.now().toString().slice(-8);
+            }
+
+            // Atualiza data da compra
+            if (orderDate) {
+                const date = new Date(orderDate);
+                document.getElementById('order-date').textContent = date.toLocaleDateString('pt-BR');
+            } else {
+                // Usa data atual se não vier da Kiwify
+                const today = new Date();
+                document.getElementById('order-date').textContent = today.toLocaleDateString('pt-BR');
+            }
+
+            // Atualiza método de pagamento
+            if (paymentMethod) {
+                const methodMap = {
+                    'credit_card': 'Cartão de Crédito',
+                    'pix': 'PIX',
+                    'boleto': 'Boleto Bancário',
+                    'paypal': 'PayPal'
+                };
+                document.getElementById('payment-method').textContent = methodMap[paymentMethod] || paymentMethod;
+            }
+
+            // Se houver nome do cliente, personaliza a mensagem
+            if (customerName) {
+                const firstName = customerName.split(' ')[0];
+                document.querySelector('.message').innerHTML = 
+                    `Olá <strong>${firstName}</strong>! Sua compra foi processada com sucesso! 🎉<br>` +
+                    `Estamos muito felizes em tê-lo(a) conosco. Um email de confirmação foi enviado para <strong>${customerEmail || 'seu endereço cadastrado'}</strong>.`;
+            }
+
+            // Log para debug (pode remover em produção)
+            console.log('Dados capturados da Kiwify:', {
+                orderId,
+                orderDate,
+                paymentMethod,
+                customerName,
+                customerEmail,
+                orderValue
+            });
+        });
+    </script>
+</body>
+</html>
